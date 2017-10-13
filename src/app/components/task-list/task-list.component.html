@@ -1,0 +1,23 @@
+<ul class="task-filters">
+	<li [routerLink]="['/tasks']">
+		<a [class.active]="status == 0">View All</a>
+	</li>
+	<li [routerLink]="['/tasks', { completed : false }]">
+		<a [class.active]="status == -1">In Progress</a>
+	</li>
+	<li [routerLink]="['/tasks', { completed : true }]">
+		<a [class.active]="status == 1">Completed</a>
+	</li>
+</ul>
+
+<div class="task-list">
+	<!-- Item -->
+	<app-task-item
+		*ngFor="let task of tasks"
+		[task]="task"
+		(setStatus)="setStatus.emit(task)"
+		(delete)="delete.emit(task.id)"
+		(update)="update.emit(task)"
+	></app-task-item>
+	<!-- End Item -->
+</div>
